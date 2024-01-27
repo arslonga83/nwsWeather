@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+  <title>NWS Weather</title>
+</head>
+<body>
+
+<header>
+  <h1 class="header" id="header">Weather for</h1>
+  <p class="coords" id="coords"></p>
+  <div class="search" id="search">
+    <h4>Search different coordinates?</h4>
+    <input type="text" id="latInput">
+    <label for="latInput">Latitude</label>
+    <input type="text" id="lonInput">
+    <label for="lonInput">Longitude</label>
+    <button>Submit</button>
+  </div>
+</header>
+
+<main id="main">
+  <div class="alert" id="alert"></div>
+  <div class="weather" id="weather"></div>
+</main>  
+
+</body>
+<script src="script.js" type="module"></script>
+</html>
