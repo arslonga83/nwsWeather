@@ -7,6 +7,7 @@ const position = await getPosition()
   lon = position.coords.longitude
 document.querySelector('#coords').textContent = `
   ${lat.toFixed(4)}°N, ${lon.toFixed(4)}°W`
+document.querySelector('.loader').classList.remove('loader')
 const gridData = await getGrid()
 const weather = await getWeather(gridData)
 const alerts = await getAlerts(lat, lon)
@@ -29,6 +30,7 @@ async function getGrid() {
   let gridId = result.properties.gridId
   let gridX = result.properties.gridX
   let gridY = result.properties.gridY
+  
   return {gridId: gridId, gridX: gridX, gridY: gridY}
 }
 
