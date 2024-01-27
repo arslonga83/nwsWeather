@@ -65,15 +65,15 @@ header {
 input, button {
   margin: .5em;
   border-style: solid;
-  border-color:#39ff14
+  border-color:#39ff14;
+  font-family: inherit;
+  font-weight: bold;
 }
 
 button {
   color: white;
   background-color: black;
   padding: 1em 2em;
-  font-weight: bold;
-  font-family: inherit;
 }
 
 .alert, .forecast {
