@@ -1,18 +1,39 @@
 let lat = ''
 let lon = ''
+let latInput = document.querySelector('#latInput')
+let lonInput = document.querySelector('#lonInput')
 
-// main code section to load data and display on page
+
+// GET POSITION ON INITIAL LOAD
 const position = await getPosition()
   lat = position.coords.latitude
   lon = position.coords.longitude
-document.querySelector('#coords').textContent = `
+loadPage()
+
+// MAIN SEARCH AND LOAD FUNCTION
+async function loadPage() {
+  document.querySelector('#loader').classList.add('loader')
+  document.querySelector('#coords').textContent = `
   ${lat.toFixed(4)}°N, ${lon.toFixed(4)}°W`
-document.querySelector('.loader').classList.remove('loader')
-const gridData = await getGrid()
-const weather = await getWeather(gridData)
-const alerts = await getAlerts(lat, lon)
-getAlertsHtml(alerts)
-getHtml(weather)
+  document.querySelector('#loader').classList.remove('loader')
+  const gridData = await getGrid()
+  const weather = await getWeather(gridData)
+  const alerts = await getAlerts(lat, lon)
+  getAlertsHtml(alerts)
+  getHtml(weather)
+}  
+
+
+// GET INPUT FUNCTION
+document.querySelector('#button').addEventListener('click', () => {
+  lat = parseFloat(latInput.value)
+  lon = parseFloat(lonInput.value)
+  loadPage()
+  console.log(latInput.value, lonInput.value)
+  latInput.value = ''
+  lonInput.value = ''
+})
+
 
 // GEOLOCATION FUNCTIONS
 
@@ -65,7 +86,7 @@ function getHtml(weather) {
       </div>
       `
   }
-  document.querySelector('#weather').innerHTML += weatherHtml
+  document.querySelector('#weather').innerHTML = weatherHtml
 }
 
 function getAlertsHtml(alerts) {
@@ -83,6 +104,6 @@ function getAlertsHtml(alerts) {
       `
     }
   }
-  document.querySelector('#alert').innerHTML += alertsHtml
+  document.querySelector('#alert').innerHTML = alertsHtml
 }
 
