@@ -1,7 +1,6 @@
 let lat = ''
 let lon = ''
-let latInput = document.querySelector('#latInput')
-let lonInput = document.querySelector('#lonInput')
+let addressInput = document.querySelector('#address')
 
 // GET POSITION ON INITIAL LOAD
 const position = await getPosition()
@@ -25,14 +24,32 @@ async function loadPage() {
 
 // GET INPUT FUNCTION
 document.querySelector('#button').addEventListener('click', () => {
-  lat = parseFloat(latInput.value)
-  lon = parseFloat(lonInput.value)
-  loadPage()
-  console.log(latInput.value, lonInput.value)
-  latInput.value = ''
-  lonInput.value = ''
+  getNewLocation()
+})
+document.querySelector('#address').addEventListener('keypress', (e) => {
+  if(e.key === 'Enter') {
+    getNewLocation()
+  }
 })
 
+function getNewLocation() {
+  let requestOptions = {
+    method: 'POST',
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({address: addressInput.value}),
+    redirect: 'follow'
+  };
+
+  fetch("https://weather-server-l1r2.onrender.com", requestOptions)
+    .then(response => response.json())
+    .then(result => {
+      lat = result.lat
+      lon = result.lng
+      loadPage()
+      addressInput.value = ''
+    })
+    .catch(error => console.log('error', error));
+}
 
 // GEOLOCATION FUNCTIONS
 
