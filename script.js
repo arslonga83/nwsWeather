@@ -3,10 +3,6 @@ let lon = ''
 let latInput = document.querySelector('#latInput')
 let lonInput = document.querySelector('#lonInput')
 
-
-let geokey = process.env.GEOCODING_API
-console.log(geokey)
-
 // GET POSITION ON INITIAL LOAD
 const position = await getPosition()
   lat = position.coords.latitude
