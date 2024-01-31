@@ -15,12 +15,12 @@ async function loadPage() {
   document.querySelector('#loader').classList.add('loader')
   document.querySelector('#coords').textContent = `
   ${lat.toFixed(4)}°N, ${lon.toFixed(4)}°W`
-  document.querySelector('#loader').classList.remove('loader')
   const gridData = await getGrid()
   const weather = await getWeather(gridData)
   const alerts = await getAlerts(lat, lon)
   getAlertsHtml(alerts)
   getHtml(weather)
+  document.querySelector('#loader').classList.remove('loader')
 }  
 
 
