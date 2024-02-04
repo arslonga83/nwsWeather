@@ -2,6 +2,11 @@ let lat = ''
 let lon = ''
 let addressInput = document.querySelector('#address')
 
+// wakeup the free Render server 
+fetch("https://weather-server-l1r2.onrender.com/wakeup")
+  .then(response => response.text())
+  .then(result => console.log(result))
+
 // GET POSITION ON INITIAL LOAD
 const position = await getPosition()
   lat = position.coords.latitude
@@ -10,10 +15,6 @@ loadPage()
 
 // MAIN SEARCH AND LOAD FUNCTION
 async function loadPage() {
-  // wakeup the free Render server 
-  fetch("https://weather-server-l1r2.onrender.com/wakeup")
-    .then(response => response.text())
-    .then(result => console.log(result))
   document.querySelector('#loader').classList.add('loader')
   document.querySelector('#coords').textContent = `
   ${lat.toFixed(4)}°N, ${lon.toFixed(4)}°W`
